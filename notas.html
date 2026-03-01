@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Notas</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #4e73df, #9b59b6, #ff66cc);
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            background: white;
+            color: black;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            width: 80px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .for {
+            background-color: #4e73df;
+            color: white;
+        }
+
+        .while {
+            background-color: #9b59b6;
+            color: white;
+        }
+
+        .voltar {
+            background-color: #e74a3b;
+            color: white;
+        }
+
+        #areaNotas {
+            margin-top: 15px;
+        }
+
+        #resultado {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Cálculo de Média</h1>
+
+    <div class="container">
+
+        <h3>Quantidade de notas:</h3>
+        <input type="number" id="quantidade" min="1" placeholder="Ex: 3">
+        <br>
+        <button onclick="criarCampos()">Criar Campos</button>
+
+        <div id="areaNotas"></div>
+
+        <br>
+        <button class="for" onclick="mediaFor()">Calcular com FOR</button>
+        <button class="while" onclick="mediaWhile()">Calcular com WHILE</button>
+        <button class="voltar" onclick="window.location.href='index.html'">Voltar</button>
+
+        <div id="resultado"></div>
+
+    </div>
+
+    <footer>
+        Nome: Jéssica Thais Baccaro
+    </footer>
+
+    <script>
+        function criarCampos() {
+            let qtd = parseInt(document.getElementById("quantidade").value);
+            let area = document.getElementById("areaNotas");
+            area.innerHTML = "";
+
+            for (let i = 0; i < qtd; i++) {
+                area.innerHTML += `<input type="number" class="nota" placeholder="Nota ${i+1}">`;
+            }
+        }
+
+        function mediaFor() {
+            let notas = document.getElementsByClassName("nota");
+            let soma = 0;
+
+            for (let i = 0; i < notas.length; i++) {
+                soma += parseFloat(notas[i].value);
+            }
+
+            let media = soma / notas.length;
+            document.getElementById("resultado").innerHTML =
+                "Média (FOR): " + media.toFixed(2);
+        }
+
+        function mediaWhile() {
+            let notas = document.getElementsByClassName("nota");
+            let soma = 0;
+            let i = 0;
+
+            while (i < notas.length) {
+                soma += parseFloat(notas[i].value);
+                i++;
+            }
+
+            let media = soma / notas.length;
+            document.getElementById("resultado").innerHTML =
+                "Média (WHILE): " + media.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
