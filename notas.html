@@ -61,10 +61,6 @@
             color: white;
         }
 
-        #areaNotas {
-            margin-top: 15px;
-        }
-
         #resultado {
             margin-top: 15px;
             font-weight: bold;
@@ -78,7 +74,7 @@
 
 <body>
 
-    <h1>Cálculo de Média</h1>
+    <h1>Cálculo de Média (5 Notas)</h1>
 
     <div class="container">
 
@@ -112,14 +108,16 @@ print(f"Média das notas: {media}")
 
         <hr>
 
-        <h3>Executar:</h3>
+        <h3>Digite as 5 notas:</h3>
 
-        <input type="number" id="quantidade" min="1" placeholder="Qtd">
-        <button onclick="criarCampos()">Criar Campos</button>
-
-        <div id="areaNotas"></div>
+        <input type="number" class="nota" placeholder="Nota 1" min="0" max="10">
+        <input type="number" class="nota" placeholder="Nota 2" min="0" max="10">
+        <input type="number" class="nota" placeholder="Nota 3" min="0" max="10">
+        <input type="number" class="nota" placeholder="Nota 4" min="0" max="10">
+        <input type="number" class="nota" placeholder="Nota 5" min="0" max="10">
 
         <br>
+
         <button class="for" onclick="mediaFor()">Calcular com FOR</button>
         <button class="while" onclick="mediaWhile()">Calcular com WHILE</button>
         <button class="voltar" onclick="window.location.href='index.html'">Voltar</button>
@@ -133,25 +131,15 @@ print(f"Média das notas: {media}")
     </footer>
 
     <script>
-        function criarCampos() {
-            let qtd = parseInt(document.getElementById("quantidade").value);
-            let area = document.getElementById("areaNotas");
-            area.innerHTML = "";
-
-            for (let i = 0; i < qtd; i++) {
-                area.innerHTML += `<input type="number" class="nota" placeholder="Nota ${i+1}">`;
-            }
-        }
-
         function mediaFor() {
             let notas = document.getElementsByClassName("nota");
             let soma = 0;
 
-            for (let i = 0; i < notas.length; i++) {
+            for (let i = 0; i < 5; i++) {
                 soma += parseFloat(notas[i].value);
             }
 
-            let media = soma / notas.length;
+            let media = soma / 5;
             document.getElementById("resultado").innerHTML =
                 "Média (FOR): " + media.toFixed(2);
         }
@@ -159,14 +147,14 @@ print(f"Média das notas: {media}")
         function mediaWhile() {
             let notas = document.getElementsByClassName("nota");
             let soma = 0;
-            let i = 0;
+            let contador = 0;
 
-            while (i < notas.length) {
-                soma += parseFloat(notas[i].value);
-                i++;
+            while (contador < 5) {
+                soma += parseFloat(notas[contador].value);
+                contador++;
             }
 
-            let media = soma / notas.length;
+            let media = soma / 5;
             document.getElementById("resultado").innerHTML =
                 "Média (WHILE): " + media.toFixed(2);
         }
