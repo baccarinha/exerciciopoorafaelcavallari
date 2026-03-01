@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto Matemática</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #4e73df, #9b59b6, #ff66cc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        button {
+            width: 200px;
+            padding: 15px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .b1 { background-color: #4e73df; color: white; }
+        .b2 { background-color: #1cc88a; color: white; }
+        .b3 { background-color: #f6c23e; color: white; }
+        .b4 { background-color: #e74a3b; color: white; }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Projeto Matemática</h1>
+
+        <button class="b1" onclick="window.location.href='bhaskara.html'">
+            Bháskara
+        </button>
+
+        <button class="b2" onclick="window.location.href='notas.html'">
+            Notas
+        </button>
+
+        <button class="b3" onclick="window.location.href='tabuada.html'">
+            Tabuada
+        </button>
+
+        <button class="b4" onclick="window.location.href='desafio.html'">
+            Desafio
+        </button>
+
+    </div>
+
+</body>
+</html>
