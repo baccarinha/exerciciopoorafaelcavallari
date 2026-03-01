@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Desafio - Caixa Eletrônico</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #4e73df, #9b59b6, #ff66cc);
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            background: white;
+            color: black;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        pre {
+            text-align: left;
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 150px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .executar {
+            background-color: #4e73df;
+            color: white;
+        }
+
+        .voltar {
+            background-color: #e74a3b;
+            color: white;
+        }
+
+        #resultado {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: left;
+            display: inline-block;
+        }
+
+        footer {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Desafio - Caixa Eletrônico</h1>
+
+    <div class="container">
+
+        <h3>Código em Python:</h3>
+
+        <pre>
+# Notas disponíveis
+notas = [200, 100, 50, 20, 10, 5, 2]
+
+valor = int(input("Digite o valor para saque: R$ "))
+
+if valor < 2:
+    print("Valor inválido para saque.")
+else:
+    print(f"\nPara sacar R$ {valor}, serão necessárias:")
+
+    for nota in notas:
+        quantidade = valor // nota
+        if quantidade > 0:
+            print(f"{quantidade} nota(s) de R$ {nota}")
+            valor = valor % nota
+
+    if valor != 0:
+        print("\nNão é possível sacar o valor exato com as notas disponíveis.")
+        </pre>
+
+        <hr>
+
+        <h3>Executar:</h3>
+
+        <input type="number" id="valor" placeholder="Digite o valor">
+        <br>
+
+        <button class="executar" onclick="calcularSaque()">Executar</button>
+        <button class="voltar" onclick="window.location.href='index.html'">Voltar</button>
+
+        <div id="resultado"></div>
+
+    </div>
+
+    <footer>
+        Nome: Jéssica Thais Baccaro
+    </footer>
+
+    <script>
+        function calcularSaque() {
+            let notas = [200, 100, 50, 20, 10, 5, 2];
+            let valor = parseInt(document.getElementById("valor").value);
+            let resultadoDiv = document.getElementById("resultado");
+
+            if (valor < 2 || isNaN(valor)) {
+                resultadoDiv.innerHTML = "Valor inválido para saque.";
+                return;
+            }
+
+            let resultado = "<br>Para sacar R$ " + valor + ", serão necessárias:<br><br>";
+
+            for (let i = 0; i < notas.length; i++) {
+                let quantidade = Math.floor(valor / notas[i]);
+                if (quantidade > 0) {
+                    resultado += quantidade + " nota(s) de R$ " + notas[i] + "<br>";
+                    valor = valor % notas[i];
+                }
+            }
+
+            if (valor !== 0) {
+                resultado += "<br>Não é possível sacar o valor exato com as notas disponíveis.";
+            }
+
+            resultadoDiv.innerHTML = resultado;
+        }
+    </script>
+
+</body>
+</html>
