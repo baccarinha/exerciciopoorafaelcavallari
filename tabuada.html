@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabuada</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #4e73df, #9b59b6, #ff66cc);
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            background: white;
+            color: black;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        pre {
+            text-align: left;
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 120px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .executar {
+            background-color: #4e73df;
+            color: white;
+        }
+
+        .voltar {
+            background-color: #e74a3b;
+            color: white;
+        }
+
+        #resultado {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: left;
+            display: inline-block;
+        }
+
+        footer {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Tabuada</h1>
+
+    <div class="container">
+
+        <h3>Código em Python:</h3>
+
+        <pre>
+# Lê um número inteiro do usuário
+numero = int(input("Digite um número inteiro: "))
+
+print(f"\nTabuada do {numero}:\n")
+
+# Laço de 1 até 10
+for i in range(1, 11):
+    resultado = numero * i
+    print(f"{numero} x {i} = {resultado}")
+        </pre>
+
+        <hr>
+
+        <h3>Executar:</h3>
+
+        <input type="number" id="numero" placeholder="Digite um número">
+        <br>
+
+        <button class="executar" onclick="calcularTabuada()">Executar</button>
+        <button class="voltar" onclick="window.location.href='index.html'">Voltar</button>
+
+        <div id="resultado"></div>
+
+    </div>
+
+    <footer>
+        Nome: Jéssica Thais Baccaro
+    </footer>
+
+    <script>
+        function calcularTabuada() {
+            let numero = parseInt(document.getElementById("numero").value);
+            let resultadoDiv = document.getElementById("resultado");
+
+            if (isNaN(numero)) {
+                resultadoDiv.innerHTML = "Digite um número válido.";
+                return;
+            }
+
+            let resultado = "<br>Tabuada do " + numero + ":<br><br>";
+
+            for (let i = 1; i <= 10; i++) {
+                resultado += numero + " x " + i + " = " + (numero * i) + "<br>";
+            }
+
+            resultadoDiv.innerHTML = resultado;
+        }
+    </script>
+
+</body>
+</html>
