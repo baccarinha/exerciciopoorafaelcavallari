@@ -44,24 +44,17 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: bold;
-        }
-
-        .executar {
             background-color: #4e73df;
             color: white;
         }
 
         .voltar {
             background-color: #e74a3b;
-            color: white;
         }
 
         #resultado {
             margin-top: 15px;
             font-weight: bold;
-            text-align: left;
-            display: inline-block;
         }
 
         footer {
@@ -72,13 +65,12 @@
 
 <body>
 
-    <h1>Desafio - Caixa Eletrônico</h1>
+    <h1>Saque usando a Menor Nota</h1>
 
     <div class="container">
 
-        <h3>Código em Python:</h3>
-
-<pre>
+        <h3>Código em Python</h3>
+        <pre>
 valor = int(input("Digite o valor para saque: "))
 
 if valor <= 0:
@@ -88,23 +80,23 @@ elif valor == 1 or valor == 3:
 else:
     notas = [200, 100, 50, 20, 10, 5, 2]
     
-    print("Cédulas entregues:")
+    menor_nota = notas[-1]
 
-    for nota in notas:
-        quantidade = valor // nota
-        if quantidade > 0:
-            print(f"{quantidade} nota(s) de R$ {nota}")
-            valor = valor % nota
-</pre>
+    quantidade = valor // menor_nota
+
+    print("Cédulas entregues:")
+    print(f"{quantidade} nota(s) de R$ {menor_nota}")
+        </pre>
 
         <hr>
 
-        <h3>Executar:</h3>
+        <h3>Digite o valor para saque:</h3>
 
         <input type="number" id="valor" placeholder="Digite o valor">
+
         <br>
 
-        <button class="executar" onclick="calcularSaque()">Executar</button>
+        <button onclick="calcularSaque()">Calcular</button>
         <button class="voltar" onclick="window.location.href='index.html'">Voltar</button>
 
         <div id="resultado"></div>
@@ -115,39 +107,33 @@ else:
         © 2026 — Jéssica Thais Baccaro
     </footer>
 
-<script>
-function calcularSaque() {
+    <script>
+        function calcularSaque() {
 
-    let valor = parseInt(document.getElementById("valor").value);
-    let resultadoDiv = document.getElementById("resultado");
+            let valor = parseInt(document.getElementById("valor").value);
+            let resultadoDiv = document.getElementById("resultado");
 
-    let resultado = "";
+            if (valor <= 0 || isNaN(valor)) {
+                resultadoDiv.innerHTML = "Valor inválido.";
+            }
+            else if (valor === 1 || valor === 3) {
+                resultadoDiv.innerHTML =
+                    "Não é possível sacar esse valor com as cédulas disponíveis.";
+            }
+            else {
 
-    if (valor <= 0 || isNaN(valor)) {
-        resultado = "Valor inválido.";
-    } 
-    else if (valor == 1 || valor == 3) {
-        resultado = "Não é possível sacar esse valor com as cédulas disponíveis.";
-    } 
-    else {
+                let notas = [200, 100, 50, 20, 10, 5, 2];
 
-        let notas = [200, 100, 50, 20, 10, 5, 2];
+                let menor_nota = notas[notas.length - 1];
 
-        resultado += "Cédulas entregues:<br><br>";
+                let quantidade = Math.floor(valor / menor_nota);
 
-        for (let nota of notas) {
-
-            let quantidade = Math.floor(valor / nota);
-
-            if (quantidade > 0) {
-                resultado += quantidade + " nota(s) de R$ " + nota + "<br>";
-                valor = valor % nota;
+                resultadoDiv.innerHTML =
+                    "Cédulas entregues:<br><br>" +
+                    quantidade + " nota(s) de R$ " + menor_nota;
             }
         }
-    }
+    </script>
 
-    resultadoDiv.innerHTML = resultado;
-}
-</script>
 </body>
 </html>
