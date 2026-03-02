@@ -116,40 +116,38 @@ else:
     </footer>
 
 <script>
-    function calcularSaque() {
+function calcularSaque() {
 
-        let valor = parseInt(document.getElementById("valor").value);
-        let resultadoDiv = document.getElementById("resultado");
+    let valor = parseInt(document.getElementById("valor").value);
+    let resultadoDiv = document.getElementById("resultado");
 
-        // Mesmo if do Python
-        if (valor <= 0 || isNaN(valor)) {
-            resultadoDiv.innerHTML = "Valor inválido.";
-        }
-        else if (valor === 1 || valor === 3) {
-            resultadoDiv.innerHTML = 
-                "Não é possível sacar esse valor com as cédulas disponíveis.";
-        }
-        else {
+    let resultado = "";
 
-            let notas = [200, 100, 50, 20, 10, 5, 2];
-            let resultado = "Cédulas entregues:<br><br>";
+    if (valor <= 0 || isNaN(valor)) {
+        resultado = "Valor inválido.";
+    } 
+    else if (valor == 1 || valor == 3) {
+        resultado = "Não é possível sacar esse valor com as cédulas disponíveis.";
+    } 
+    else {
 
-            // Mesmo for do Python
-            for (let i = 0; i < notas.length; i++) {
+        let notas = [200, 100, 50, 20, 10, 5, 2];
 
-                let quantidade = Math.floor(valor / notas[i]);
+        resultado += "Cédulas entregues:<br><br>";
 
-                if (quantidade > 0) {
-                    resultado += quantidade + 
-                        " nota(s) de R$ " + notas[i] + "<br>";
+        for (let nota of notas) {
 
-                    valor = valor % notas[i];
-                }
+            let quantidade = Math.floor(valor / nota);
+
+            if (quantidade > 0) {
+                resultado += quantidade + " nota(s) de R$ " + nota + "<br>";
+                valor = valor % nota;
             }
-
-            resultadoDiv.innerHTML = resultado;
         }
     }
+
+    resultadoDiv.innerHTML = resultado;
+}
 </script>
 </body>
 </html>
