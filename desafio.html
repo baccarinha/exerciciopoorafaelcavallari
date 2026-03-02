@@ -115,33 +115,33 @@ else:
         © 2026 — Jéssica Thais Baccaro
     </footer>
 
-    <script>
-        function calcularSaque() {
+<script>
+    function calcularSaque() {
 
-            let valor = parseInt(document.getElementById("valor").value);
-            let resultadoDiv = document.getElementById("resultado");
+        let valor = parseInt(document.getElementById("valor").value);
+        let resultadoDiv = document.getElementById("resultado");
 
-            if (valor <= 0 || isNaN(valor)) {
-                resultadoDiv.innerHTML = "Valor inválido.";
-                return;
-            }
-
-            if (valor === 1 || valor === 3) {
-                resultadoDiv.innerHTML = 
-                    "Não é possível sacar esse valor com as cédulas disponíveis.";
-                return;
-            }
+        // Mesmo if do Python
+        if (valor <= 0 || isNaN(valor)) {
+            resultadoDiv.innerHTML = "Valor inválido.";
+        }
+        else if (valor === 1 || valor === 3) {
+            resultadoDiv.innerHTML = 
+                "Não é possível sacar esse valor com as cédulas disponíveis.";
+        }
+        else {
 
             let notas = [200, 100, 50, 20, 10, 5, 2];
-            let resultado = "<br>Cédulas entregues:<br><br>";
+            let resultado = "Cédulas entregues:<br><br>";
 
+            // Mesmo for do Python
             for (let i = 0; i < notas.length; i++) {
+
                 let quantidade = Math.floor(valor / notas[i]);
 
                 if (quantidade > 0) {
-                    resultado += quantidade +
-                        " nota(s) de R$ " +
-                        notas[i] + "<br>";
+                    resultado += quantidade + 
+                        " nota(s) de R$ " + notas[i] + "<br>";
 
                     valor = valor % notas[i];
                 }
@@ -149,7 +149,7 @@ else:
 
             resultadoDiv.innerHTML = resultado;
         }
-    </script>
-
+    }
+</script>
 </body>
 </html>
