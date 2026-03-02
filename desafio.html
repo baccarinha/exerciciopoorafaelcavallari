@@ -79,27 +79,22 @@
         <h3>Código em Python:</h3>
 
 <pre>
-# Notas disponíveis
-notas = [2, 5, 10, 20, 50, 100, 200]
-            
-valor = int(input("Digite o valor para saque: R$ "))
+valor = int(input("Digite o valor para saque: "))
 
-if valor < 2:
-    print("Valor inválido para saque.")
+if valor <= 0:
+    print("Valor inválido.")
+elif valor == 1 or valor == 3:
+    print("Não é possível sacar esse valor com as cédulas disponíveis.")
 else:
-    print(f"\nPara sacar R$ {valor}, serão necessárias:")
-
-    # Ordena da maior para menor para calcular corretamente
-    notas.sort(reverse=True)
+    notas = [200, 100, 50, 20, 10, 5, 2]
+    
+    print("Cédulas entregues:")
 
     for nota in notas:
         quantidade = valor // nota
         if quantidade > 0:
             print(f"{quantidade} nota(s) de R$ {nota}")
             valor = valor % nota
-
-    if valor != 0:
-        print("\nNão é possível sacar o valor exato com as notas disponíveis.")
 </pre>
 
         <hr>
@@ -123,47 +118,33 @@ else:
     <script>
         function calcularSaque() {
 
-            // Ordem correta para cálculo (maiores primeiro)
-            let notas = [200, 100, 50, 20, 10, 5, 2];
-
             let valor = parseInt(document.getElementById("valor").value);
             let resultadoDiv = document.getElementById("resultado");
 
-            if (valor < 2 || isNaN(valor)) {
-                resultadoDiv.innerHTML = "Valor inválido para saque.";
+            if (valor <= 0 || isNaN(valor)) {
+                resultadoDiv.innerHTML = "Valor inválido.";
                 return;
             }
 
-            let valorOriginal = valor;
-            let resultadoArray = [];
+            if (valor === 1 || valor === 3) {
+                resultadoDiv.innerHTML = 
+                    "Não é possível sacar esse valor com as cédulas disponíveis.";
+                return;
+            }
 
-            // Cálculo
+            let notas = [200, 100, 50, 20, 10, 5, 2];
+            let resultado = "<br>Cédulas entregues:<br><br>";
+
             for (let i = 0; i < notas.length; i++) {
                 let quantidade = Math.floor(valor / notas[i]);
 
                 if (quantidade > 0) {
-                    resultadoArray.push({
-                        nota: notas[i],
-                        quantidade: quantidade
-                    });
+                    resultado += quantidade +
+                        " nota(s) de R$ " +
+                        notas[i] + "<br>";
 
                     valor = valor % notas[i];
                 }
-            }
-
-            // Mostrar menores primeiro
-            resultadoArray.sort((a, b) => a.nota - b.nota);
-
-            let resultado = "<br>Para sacar R$ " + valorOriginal + ", serão necessárias:<br><br>";
-
-            for (let i = 0; i < resultadoArray.length; i++) {
-                resultado += resultadoArray[i].quantidade +
-                    " nota(s) de R$ " +
-                    resultadoArray[i].nota + "<br>";
-            }
-
-            if (valor !== 0) {
-                resultado += "<br>Não é possível sacar o valor exato com as notas disponíveis.";
             }
 
             resultadoDiv.innerHTML = resultado;
