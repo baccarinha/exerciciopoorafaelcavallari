@@ -44,6 +44,7 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         .executar {
@@ -77,7 +78,7 @@
 
         <h3>Código em Python:</h3>
 
-        <pre>
+<pre>
 # Notas disponíveis
 notas = [2, 5, 10, 20, 50, 100, 200]
             
@@ -88,6 +89,9 @@ if valor < 2:
 else:
     print(f"\nPara sacar R$ {valor}, serão necessárias:")
 
+    # Ordena da maior para menor para calcular corretamente
+    notas.sort(reverse=True)
+
     for nota in notas:
         quantidade = valor // nota
         if quantidade > 0:
@@ -96,7 +100,7 @@ else:
 
     if valor != 0:
         print("\nNão é possível sacar o valor exato com as notas disponíveis.")
-        </pre>
+</pre>
 
         <hr>
 
@@ -118,7 +122,10 @@ else:
 
     <script>
         function calcularSaque() {
+
+            // Ordem correta para cálculo (maiores primeiro)
             let notas = [200, 100, 50, 20, 10, 5, 2];
+
             let valor = parseInt(document.getElementById("valor").value);
             let resultadoDiv = document.getElementById("resultado");
 
@@ -127,14 +134,32 @@ else:
                 return;
             }
 
-            let resultado = "<br>Para sacar R$ " + valor + ", serão necessárias:<br><br>";
+            let valorOriginal = valor;
+            let resultadoArray = [];
 
+            // Cálculo
             for (let i = 0; i < notas.length; i++) {
                 let quantidade = Math.floor(valor / notas[i]);
+
                 if (quantidade > 0) {
-                    resultado += quantidade + " nota(s) de R$ " + notas[i] + "<br>";
+                    resultadoArray.push({
+                        nota: notas[i],
+                        quantidade: quantidade
+                    });
+
                     valor = valor % notas[i];
                 }
+            }
+
+            // Mostrar menores primeiro
+            resultadoArray.sort((a, b) => a.nota - b.nota);
+
+            let resultado = "<br>Para sacar R$ " + valorOriginal + ", serão necessárias:<br><br>";
+
+            for (let i = 0; i < resultadoArray.length; i++) {
+                resultado += resultadoArray[i].quantidade +
+                    " nota(s) de R$ " +
+                    resultadoArray[i].nota + "<br>";
             }
 
             if (valor !== 0) {
